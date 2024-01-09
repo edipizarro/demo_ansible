@@ -1,0 +1,15 @@
+[proxy]
+proxy-server ansible_host=pizarro.pizza ansible_user=server ansible_port=2222 ansible_ssh_private_key_file=/home/edipizarro/.ssh/id_ed25519
+
+[proxy2]
+server
+
+[quimal]
+quimal-cpu1 ansible_host=192.168.100.101
+quimal-cpu2 ansible_host=192.168.100.102
+; quimal-cpu3 ansible_host=192.168.100.103
+; quimal-cpu4 ansible_host=192.168.100.104
+; quimal-cpu5 ansible_host=192.168.100.105
+
+[quimal:vars]
+ansible_ssh_common_args='-o ProxyCommand="ssh -p 2222 -W %h:%p -q server"'

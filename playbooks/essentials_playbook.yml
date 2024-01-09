@@ -1,0 +1,5 @@
+- hosts: quimal
+  become: yes
+
+  roles:
+    - role: user

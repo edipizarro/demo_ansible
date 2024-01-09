@@ -1,0 +1,7 @@
+---
+- hosts: quimal
+  become: yes
+
+  tasks: # Path relative to the playbook location
+    - import_tasks: ../tasks/apt_update_and_upgrade.yml
+    # - import_tasks: ../tasks/apt_install_packages.yml

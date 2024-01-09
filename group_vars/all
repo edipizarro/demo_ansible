@@ -1,0 +1,5 @@
+---
+all_groups_var: 'Hello everyone'
+packages:
+  - nmap
+  - speedtest-cli

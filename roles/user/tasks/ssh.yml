@@ -1,0 +1,20 @@
+---
+- name: Enable passwordless sudo for "{{ username }}"
+  ansible.builtin.lineinfile:
+    dest: /etc/sudoers
+    regexp: "^%wheel"
+    line: "{{ username }} ALL=(ALL) NOPASSWD: ALL"
+    validate: "visudo -cf %s"
+
+- name: Disable SSH password authentication
+  ansible.builtin.lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^#PasswordAuthentication yes"
+    line: "PasswordAuthentication no"
+  register: sshd_config_state
+
+- name: Restart SSH daemon
+  ansible.builtin.service:
+    name: sshd
+    state: restarted
+  when: sshd_config_state.changed
